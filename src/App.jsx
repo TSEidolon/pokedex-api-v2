@@ -1,5 +1,6 @@
 import Header from "./components/header"
 import MainArea from "./components/mainArea"
+import MainAreaTest from "./components/mainAreaTest"
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <div className="">
       test
       <Header/>
-      <MainArea/>
+      <MainAreaTest/>
     </div>
   )
 }
