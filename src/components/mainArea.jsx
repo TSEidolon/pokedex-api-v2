@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
 const MainArea = () => {
-  const [pokemonListAll,setPokemonListAll] = useState([])
+  const [pokemonListAll,setPokemonListAll] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //makes showPokemonList run once page opens
   useEffect(() => {
     showPokemonList()
   }, [])
-
 
   //pokemon list fetch
   const showPokemonList = async () => {
@@ -21,18 +21,22 @@ const MainArea = () => {
     console.log(data.results)   
   }
     
+  const filteredPokemonList = pokemonListAll.filter(
+    (pokemon) => pokemon.name.includes(searchTerm)
+  )
 
   return (
     <div>
-      <section className='pokedex-left'>
-
+      <section className='pokedex-left border-2 border-amber-600'>
+        <input className='search-box' type="text" placeholder='Search...' value={searchTerm} onChange={event => setSearchTerm(event.target.value)}
+        />
       </section>
       <section className='pokedex-middle'>
 
       </section>
       <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
         <ul>
-          {pokemonListAll.map((pokemon)=> {
+          {filteredPokemonList.map((pokemon)=> {
             return(
               <li key={pokemon.url}>
                 <a href="#" >{pokemon.name}</a>
