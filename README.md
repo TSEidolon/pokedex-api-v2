@@ -1,3 +1,5 @@
+[Figma Mockup](https://www.figma.com/design/ZjhKNX4SJLmqhdf7YKuuXK/Pokedex-Api?node-id=0-1&t=HPZ8UZpWkXefTma6-1)
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
