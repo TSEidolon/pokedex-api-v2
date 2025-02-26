@@ -27,9 +27,12 @@ const MainArea = () => {
 
   return (
     <div>
-      <section className='pokedex-left border-2 border-amber-600'>
+      <section className='pokedex-top border-2 border-amber-600'>
         <input className='search-box' type="text" placeholder='Search...' value={searchTerm} onChange={event => setSearchTerm(event.target.value)}
         />
+      </section>
+      <section className="pokedex-left">
+
       </section>
       <section className='pokedex-middle'>
 
