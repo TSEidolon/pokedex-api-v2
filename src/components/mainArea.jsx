@@ -1,26 +1,27 @@
-import React from 'react'
+import { useState, useEffect } from "react";
 
 const MainArea = () => {
+  const [pokemonListAll,setPokemonListAll] = useState([])
+
+  //makes showPokemonList run once page opens
+  useEffect(() => {
+    showPokemonList()
+  }, [])
 
 
   //pokemon list fetch
-  async function pokemonList() {
-    const pokemonListURL = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
-    try{
-      const listResponse = await fetch (pokemonListURL);
-      if(!listResponse.ok){
-        throw new error(`Response for pokemon list: ${listResponse.status}`)
-      }
-    const pokemonListData = await listResponse.json();
-    console.log(pokemonListData)
-    } 
-    
-    catch (error) {
-      console.error(error.message);
+  const showPokemonList = async () => {
+    const response = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+    if (!response.ok) {
+      console.error(`Error fetching Pokemon: ${response.statusText}`);
+      return;
     }
+    const data = await response.json();
+    setPokemonListAll(data.results)
+    console.log(data.results)   
   }
+    
 
-  pokemonList()
   return (
     <div>
       <section className='pokedex-left'>
@@ -29,8 +30,18 @@ const MainArea = () => {
       <section className='pokedex-middle'>
 
       </section>
-      <section className='pokedex-right'>
+      <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
+        <ul>
+          {pokemonListAll.map((pokemon)=> {
+            return(
+              <li key={pokemon.url}>
+                <a href="#" >{pokemon.name}</a>
+              </li>
+            )
+          })
 
+          }
+        </ul>
       </section>
     </div>
   )
