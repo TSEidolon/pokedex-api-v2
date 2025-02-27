@@ -49,6 +49,17 @@ const MainAreaTest = () => {
           selectedPokemon && (
             <div>
               <h2 className="">{selectedPokemon.name}</h2>
+              <img src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
+              <p>Height: {selectedPokemon.height}</p>
+              <p>Weight: {selectedPokemon.weight}</p>
+
+              {
+                selectedPokemon.stats.map((stat, index) => (
+                  <div>
+                    <p> {stat.stat.name}: {stat.base_stat} </p>
+                  </div>
+                ))
+              }
             </div>
           )
         }
