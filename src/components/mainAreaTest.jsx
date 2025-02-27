@@ -27,15 +27,16 @@ const MainAreaTest = () => {
   )
 
   //fetch selected pokemon
-  // const showPokemon = async (url) => {
-  //   const response = await fetch (url);
-  //   if (!response.ok) {
-  //     console.error(`Error fetching Pokemon: ${response.statusText}`);
-  //     return;
-  //   }
-  //   const data = await response.json();
-  //   setSelectedPokemon(data)
-  // }
+  const showPokemon = async (url) => {
+    const response = await fetch (url);
+    if (!response.ok) {
+      console.error(`Error fetching Pokemon: ${response.statusText}`);
+      return;
+    }
+    const data = await response.json();
+    console.log(data)
+    setSelectedPokemon(data)
+  }
 
   return (
     <div>
@@ -43,8 +44,14 @@ const MainAreaTest = () => {
         <input className='search-box' type="text" placeholder='Search...' value={searchTerm} onChange={event => setSearchTerm(event.target.value)}
         />
       </section>
-      <section className="pokedex-left">
-
+      <section className="pokedex-left h-[400px] w-[350px] border-2 border-black">
+        {
+          selectedPokemon && (
+            <div>
+              <h2 className="">{selectedPokemon.name}</h2>
+            </div>
+          )
+        }
       </section>
       <section className='pokedex-middle'>
 
@@ -54,7 +61,7 @@ const MainAreaTest = () => {
           {filteredPokemonList.map((pokemon)=> {
             return(
               <li key={pokemon.url}>
-                <a href="#" >{pokemon.name}</a>
+                <a onClick={()=> showPokemon(pokemon.url)} href="#" >{pokemon.name}</a>
               </li>
             )
           })
