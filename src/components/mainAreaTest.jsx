@@ -4,7 +4,9 @@ const MainAreaTest = () => {
   const [pokemonListAll,setPokemonListAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(pokemonListAll[1]);
+  const [prevSelectedIndex, setPrevSelectedIndex] = useState();
+  const [nextSelectedIndex, setNextSelectedIndex] = useState();
 
   //makes showPokemonList run once page opens
   useEffect(() => {
@@ -30,16 +32,33 @@ const MainAreaTest = () => {
   //Index handling
   const handleSelect = (index) => {
     setSelectedIndex(index);
-    console.log(index)
-  }
-  const totalPokemon = pokemonListAll.length
-  const prevIndex = (selectedIndex - 1 + totalPokemon) % totalPokemon;
-  const nextIndex = (selectedIndex + 1) % totalPokemon;
 
-  const highlightPokemon = pokemonListAll[selectedIndex];
-  const prevPokemon = pokemonListAll[prevIndex];
-  const nextPokemon = pokemonListAll[nextIndex];
-  console.log(highlightPokemon,prevPokemon,nextPokemon)
+  }
+    const totalPokemon = pokemonListAll.length
+    const prevIndex = (selectedIndex - 1 + totalPokemon) % totalPokemon;
+    const nextIndex = (selectedIndex + 1) % totalPokemon;
+
+    const highlightPokemon = pokemonListAll[selectedIndex];
+    const prevPokemon = pokemonListAll[prevIndex];
+    const nextPokemon = pokemonListAll[nextIndex];
+
+
+
+
+  
+  //fetch prev and next pokemon
+  const indexPokemon = async () => {
+    const responsePrev = await fetch (prevPokemon.url)
+    if (!responsePrev.ok) {
+    console.error(`Error fetching Previous Pokemon: ${responsePrev.statusText}`);
+    return;
+  }
+    const prevData = await responsePrev.json();
+    console.log(prevData)
+    setPrevSelectedIndex(prevData)
+
+  }  
+  
 
   //fetch selected pokemon
   const showPokemon = async (url) => {
@@ -49,7 +68,7 @@ const MainAreaTest = () => {
       return;
     }
     const data = await response.json();
-    console.log(data)
+    // console.log(data)
     setSelectedPokemon(data)
   }
 
@@ -64,7 +83,11 @@ const MainAreaTest = () => {
       <main className="flex justify-center items-center gap-5">
         <section className='pokedex-left flex flex-col gap-5'>
           <div className="h-[100px] w-[100px] border-2 border-green-600">
-
+            {
+              prevSelectedIndex && (
+                <img src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name}  />
+              )
+            }
           </div>
           <div className="h-[100px] w-[100px] border-2 border-green-600">Bottom</div>
 
@@ -80,7 +103,7 @@ const MainAreaTest = () => {
 
                 {
                   selectedPokemon.stats.map((stat, index) => (
-                    <div>
+                    <div key={index}>
                       <p> {stat.stat.name}: {stat.base_stat} </p>
                     </div>
                   ))
@@ -95,7 +118,7 @@ const MainAreaTest = () => {
             {filteredPokemonList.map((pokemon, index)=> {
               return(
                 <li key={pokemon.url}>
-                  <a onClick={()=> {showPokemon(pokemon.url), handleSelect(index)}} href="#" >{pokemon.name}</a>
+                  <a onClick={()=> {showPokemon(pokemon.url), handleSelect(index), indexPokemon(index)}} href="#" >{pokemon.name}</a>
                 </li>
               )
             })
