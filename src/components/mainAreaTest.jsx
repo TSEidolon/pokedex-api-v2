@@ -149,10 +149,7 @@ const MainAreaTest = () => {
                     indexPokemonNext(pokemonListAll[nextIndex]);
                     }} href="#" >{pokemon.name.charAt(0).toUpperCase()+pokemon.name.slice(1)}</a>
                 </li>
-              )
-            })
-
-            }
+              )})}
           </ul>
         </section>
       </main>
