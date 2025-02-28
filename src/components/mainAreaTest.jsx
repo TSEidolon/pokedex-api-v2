@@ -44,7 +44,11 @@ const MainAreaTest = () => {
         <input className='search-box' type="text" placeholder='Search...' value={searchTerm} onChange={event => setSearchTerm(event.target.value)}
         />
       </section>
-      <section className="pokedex-left h-[400px] w-[350px] border-2 border-black">
+      <section className='pokedex-left'>
+        <div className="h-[100px] w-[100px] border-2 border-green-600">Top</div>
+        <div className="h-[100px] w-[100px] border-2 border-green-600">Bottom</div>
+      </section>
+      <section className="pokedex-middle h-[400px] w-[350px] border-2 border-black">
         {
           selectedPokemon && (
             <div>
@@ -64,9 +68,7 @@ const MainAreaTest = () => {
           )
         }
       </section>
-      <section className='pokedex-middle'>
 
-      </section>
       <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
         <ul>
           {filteredPokemonList.map((pokemon)=> {
