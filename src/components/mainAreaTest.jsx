@@ -4,6 +4,7 @@ const MainAreaTest = () => {
   const [pokemonListAll,setPokemonListAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   //makes showPokemonList run once page opens
   useEffect(() => {
@@ -19,12 +20,26 @@ const MainAreaTest = () => {
     }
     const data = await response.json();
     setPokemonListAll(data.results)
-    console.log(data.results)   
+    // console.log(data.results)   
   }
     
   const filteredPokemonList = pokemonListAll.filter(
     (pokemon) => pokemon.name.includes(searchTerm)
   )
+
+  //Index handling
+  const handleSelect = (index) => {
+    setSelectedIndex(index);
+    console.log(index)
+  }
+  const totalPokemon = pokemonListAll.length
+  const prevIndex = (selectedIndex - 1 + totalPokemon) % totalPokemon;
+  const nextIndex = (selectedIndex + 1) % totalPokemon;
+
+  const highlightPokemon = pokemonListAll[selectedIndex];
+  const prevPokemon = pokemonListAll[prevIndex];
+  const nextPokemon = pokemonListAll[nextIndex];
+  console.log(highlightPokemon,prevPokemon,nextPokemon)
 
   //fetch selected pokemon
   const showPokemon = async (url) => {
@@ -37,6 +52,8 @@ const MainAreaTest = () => {
     console.log(data)
     setSelectedPokemon(data)
   }
+
+  
 
   return (
     <div>
@@ -72,10 +89,10 @@ const MainAreaTest = () => {
 
         <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
           <ul>
-            {filteredPokemonList.map((pokemon)=> {
+            {filteredPokemonList.map((pokemon, index)=> {
               return(
                 <li key={pokemon.url}>
-                  <a onClick={()=> showPokemon(pokemon.url)} href="#" >{pokemon.name}</a>
+                  <a onClick={()=> {showPokemon(pokemon.url), handleSelect(index)}} href="#" >{pokemon.name}</a>
                 </li>
               )
             })
