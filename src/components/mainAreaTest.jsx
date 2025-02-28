@@ -4,9 +4,9 @@ const MainAreaTest = () => {
   const [pokemonListAll,setPokemonListAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(pokemonListAll[1]);
-  const [prevSelectedIndex, setPrevSelectedIndex] = useState();
-  const [nextSelectedIndex, setNextSelectedIndex] = useState();
+  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [prevSelectedIndex, setPrevSelectedIndex] = useState(null);
+  const [nextSelectedIndex, setNextSelectedIndex] = useState(null);
 
   //makes showPokemonList run once page opens
   useEffect(() => {
@@ -22,7 +22,7 @@ const MainAreaTest = () => {
     }
     const data = await response.json();
     setPokemonListAll(data.results)
-    // console.log(data.results)   
+   
   }
     
   const filteredPokemonList = pokemonListAll.filter(
@@ -34,30 +34,37 @@ const MainAreaTest = () => {
     setSelectedIndex(index);
 
   }
-    const totalPokemon = pokemonListAll.length
-    const prevIndex = (selectedIndex - 1 + totalPokemon) % totalPokemon;
-    const nextIndex = (selectedIndex + 1) % totalPokemon;
-
-    const highlightPokemon = pokemonListAll[selectedIndex];
-    const prevPokemon = pokemonListAll[prevIndex];
-    const nextPokemon = pokemonListAll[nextIndex];
-
 
 
 
   
   //fetch prev and next pokemon
-  const indexPokemon = async () => {
-    const responsePrev = await fetch (prevPokemon.url)
-    if (!responsePrev.ok) {
-    console.error(`Error fetching Previous Pokemon: ${responsePrev.statusText}`);
-    return;
-  }
-    const prevData = await responsePrev.json();
-    console.log(prevData)
-    setPrevSelectedIndex(prevData)
-
-  }  
+  const indexPokemonPrev = async (pokemon) => {
+    if (!pokemon) return;
+    try {
+      const responsePrev = await fetch(pokemon.url);
+      if (!responsePrev.ok) {
+        throw new Error(`Error fetching Pokemon: ${responsePrev.statusText}`);
+      }
+      const prevData = await responsePrev.json();
+      setPrevSelectedIndex(prevData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const indexPokemonNext = async (pokemon) => {
+    if (!pokemon) return;
+    try {
+      const responseNext = await fetch(pokemon.url);
+      if (!responseNext.ok) {
+        throw new Error(`Error fetching Pokemon: ${responseNext.statusText}`);
+      }
+      const nextData = await responseNext.json();
+      setNextSelectedIndex(nextData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
 
   //fetch selected pokemon
@@ -68,7 +75,6 @@ const MainAreaTest = () => {
       return;
     }
     const data = await response.json();
-    // console.log(data)
     setSelectedPokemon(data)
   }
 
@@ -88,8 +94,15 @@ const MainAreaTest = () => {
                 <img src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name}  />
               )
             }
+
           </div>
-          <div className="h-[100px] w-[100px] border-2 border-green-600">Bottom</div>
+          <div className="h-[100px] w-[100px] border-2 border-green-600">
+          {
+              nextSelectedIndex && (
+                <img src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name}  />
+              )
+            }
+          </div>
 
         </section>
         <section className="pokedex-middle h-[400px] w-[350px] border-2 border-black">
@@ -118,7 +131,17 @@ const MainAreaTest = () => {
             {filteredPokemonList.map((pokemon, index)=> {
               return(
                 <li key={pokemon.url}>
-                  <a onClick={()=> {showPokemon(pokemon.url), handleSelect(index), indexPokemon(index)}} href="#" >{pokemon.name}</a>
+                  <a onClick={()=> {
+                    showPokemon(pokemon.url); 
+                    handleSelect(index);
+
+                    const total = pokemonListAll.length;
+                    const prevIndex = (index - 1 + total) % total;
+                    const nextIndex = (index + 1) % total;
+
+                    indexPokemonPrev(pokemonListAll[prevIndex]);
+                    indexPokemonNext(pokemonListAll[nextIndex]);
+                    }} href="#" >{pokemon.name}</a>
                 </li>
               )
             })
