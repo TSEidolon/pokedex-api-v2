@@ -63,8 +63,11 @@ const MainAreaTest = () => {
       </section>
       <main className="flex justify-center items-center gap-5">
         <section className='pokedex-left flex flex-col gap-5'>
-          <div className="h-[100px] w-[100px] border-2 border-green-600">Top</div>
+          <div className="h-[100px] w-[100px] border-2 border-green-600">
+
+          </div>
           <div className="h-[100px] w-[100px] border-2 border-green-600">Bottom</div>
+
         </section>
         <section className="pokedex-middle h-[400px] w-[350px] border-2 border-black">
           {
