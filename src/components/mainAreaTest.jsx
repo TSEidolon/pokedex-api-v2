@@ -88,18 +88,24 @@ const MainAreaTest = () => {
       </section>
       <main className="flex justify-center items-center gap-5">
         <section className='pokedex-left flex flex-col gap-5'>
-          <div className="h-[100px] w-[100px] border-2 border-green-600">
+          <div className="h-[150px] w-[150px] border-2 border-green-600">
             {
               prevSelectedIndex && (
-                <img src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name}  />
+                <div className="flex flex-col justify-between items-center p-2">
+                  <h2 className="">{prevSelectedIndex.name.charAt(0).toUpperCase()+prevSelectedIndex.name.slice(1)}</h2>
+                  <img className=" w-[80%] " src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name}  />
+                </div>
               )
             }
 
           </div>
-          <div className="h-[100px] w-[100px] border-2 border-green-600">
+          <div className="h-[150px] w-[150px] border-2 border-green-600">
           {
               nextSelectedIndex && (
-                <img src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name}  />
+                <div className="flex flex-col justify-between items-center p-2">
+                  <h2 className="">{nextSelectedIndex.name.charAt(0).toUpperCase()+nextSelectedIndex.name.slice(1)}</h2>
+                  <img className=" w-[80%] " src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name}  />
+                </div>
               )
             }
           </div>
@@ -109,7 +115,7 @@ const MainAreaTest = () => {
           {
             selectedPokemon && (
               <div>
-                <h2 className="">{selectedPokemon.name}</h2>
+                <h2 className="">{selectedPokemon.name.charAt(0).toUpperCase()+selectedPokemon.name.slice(1)}</h2>
                 <img src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
                 <p>Height: {selectedPokemon.height}</p>
                 <p>Weight: {selectedPokemon.weight}</p>
@@ -141,7 +147,7 @@ const MainAreaTest = () => {
 
                     indexPokemonPrev(pokemonListAll[prevIndex]);
                     indexPokemonNext(pokemonListAll[nextIndex]);
-                    }} href="#" >{pokemon.name}</a>
+                    }} href="#" >{pokemon.name.charAt(0).toUpperCase()+pokemon.name.slice(1)}</a>
                 </li>
               )
             })
