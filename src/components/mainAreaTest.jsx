@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 const MainAreaTest = () => {
   const pokemonRefs = useRef({})
+  const [highlightedPokemon, setHighlightedPokemon] = useState(null);
   const [pokemonListAll,setPokemonListAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -35,10 +36,10 @@ const MainAreaTest = () => {
   // )
 
   //scroll to pokemon on search
-  const scrollToPokemon = (name) => {
-    const ref = pokemonRefs.current[name];
-    if (ref) {
-      ref.scrollIntoView({ behavior: "smooth", block: "center" });
+  const scrollToPokemon = (pokemonName) => {
+    if (pokemonRefs.current[pokemonName]) {
+      pokemonRefs.current[pokemonName].scrollIntoView({ behavior: "smooth", block: "center" });
+      setHighlightedPokemon(pokemonName); 
     }
   };
 
@@ -181,7 +182,7 @@ const MainAreaTest = () => {
         <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
           <ul>
             {pokemonListAll.map((pokemon, index) => (
-            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)}>
+            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}>
               <a
                 onClick={() => {
                   showPokemon(pokemon.url);
