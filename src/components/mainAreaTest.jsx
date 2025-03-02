@@ -174,6 +174,9 @@ const MainAreaTest = () => {
                     </div>
                   ))
                 }
+                <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-red-400 p-2">
+                  More Info
+                </button>
               </div>
             )
           }
@@ -187,6 +190,7 @@ const MainAreaTest = () => {
                 onClick={() => {
                   showPokemon(pokemon.url);
                   handleSelect(index);
+                  setHighlightedPokemon(pokemon.name)
 
                   const total = pokemonListAll.length;
                   const prevIndex = (index - 1 + total) % total;
@@ -204,6 +208,9 @@ const MainAreaTest = () => {
           </ul>
         </section>
       </main>
+      <section className="pokedex-bottom">
+      <a href="https://pokemondb.net/pokedex/gengar"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/></a>
+      </section>
     </div>
   )
 }
