@@ -21,7 +21,7 @@ const MainAreaTest = () => {
 
   //pokemon list fetch
   const showPokemonList = async () => {
-    const response = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+    const response = await fetch ('https://pokeapi.co/api/v2/pokemon?limit=1025&offset=0')
     if (!response.ok) {
       console.error(`Error fetching Pokemon: ${response.statusText}`);
       return;
@@ -209,7 +209,7 @@ const MainAreaTest = () => {
         </section>
       </main>
       <section className="pokedex-bottom">
-      <a href="https://pokemondb.net/pokedex/gengar"><img src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/></a>
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
       </section>
     </div>
   )
