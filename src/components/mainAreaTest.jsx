@@ -8,6 +8,10 @@ const MainAreaTest = () => {
   const [prevSelectedIndex, setPrevSelectedIndex] = useState(null);
   const [nextSelectedIndex, setNextSelectedIndex] = useState(null);
 
+  //capitalzes first letter 
+  const capitalizeFirstLetter = (name) => (
+    name ? name.charAt(0).toUpperCase() + name.slice(1) : "")
+
   //makes showPokemonList run once page opens
   useEffect(() => {
     showPokemonList()
@@ -98,6 +102,7 @@ const MainAreaTest = () => {
               )
             }
 
+
           </div>
           <div className="h-[150px] w-[150px] border-2 border-green-600">
           {
@@ -115,7 +120,7 @@ const MainAreaTest = () => {
           {
             selectedPokemon && (
               <div>
-                <h2 className="">{selectedPokemon.name.charAt(0).toUpperCase()+selectedPokemon.name.slice(1)}</h2>
+                <h2 className="">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
                 <img src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
                 <p>Height: {selectedPokemon.height}</p>
                 <p>Weight: {selectedPokemon.weight}</p>
@@ -147,7 +152,7 @@ const MainAreaTest = () => {
 
                     indexPokemonPrev(pokemonListAll[prevIndex]);
                     indexPokemonNext(pokemonListAll[nextIndex]);
-                    }} href="#" >{pokemon.name.charAt(0).toUpperCase()+pokemon.name.slice(1)}</a>
+                    }} href="#" >{capitalizeFirstLetter(pokemon.name)}</a>
                 </li>
               )})}
           </ul>
