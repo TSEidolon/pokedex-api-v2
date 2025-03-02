@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const MainAreaTest = () => {
+  const pokemonRefs = useRef({})
   const [pokemonListAll,setPokemonListAll] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -29,9 +30,17 @@ const MainAreaTest = () => {
    
   }
     
-  const filteredPokemonList = pokemonListAll.filter(
-    (pokemon) => pokemon.name.includes(searchTerm)
-  )
+  // const filteredPokemonList = pokemonListAll.filter(
+  //   (pokemon) => pokemon.name.includes(searchTerm)
+  // )
+
+  //scroll to pokemon on search
+  const scrollToPokemon = (name) => {
+    const ref = pokemonRefs.current[name];
+    if (ref) {
+      ref.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   //Index handling
   const handleSelect = (index) => {
@@ -87,32 +96,64 @@ const MainAreaTest = () => {
   return (
     <div>
       <section className='pokedex-top border-2 border-amber-600'>
-        <input className='search-box' type="text" placeholder='Search...' value={searchTerm} onChange={event => setSearchTerm(event.target.value)}
+        <input className='search-box' type="text" placeholder='Search...' value={searchTerm}  
+        onChange={(event) => {
+          setSearchTerm(event.target.value);
+          const foundPokemon = pokemonListAll.find(pokemon => pokemon.name.includes(event.target.value));
+          if (foundPokemon) {
+            scrollToPokemon(foundPokemon.name);
+          }}}
         />
       </section>
       <main className="flex justify-center items-center gap-5">
         <section className='pokedex-left flex flex-col gap-5'>
           <div className="h-[150px] w-[150px] border-2 border-green-600">
-            {
-              prevSelectedIndex && (
-                <div className="flex flex-col justify-between items-center p-2">
-                  <h2 className="">{prevSelectedIndex.name.charAt(0).toUpperCase()+prevSelectedIndex.name.slice(1)}</h2>
-                  <img className=" w-[80%] " src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name}  />
-                </div>
-              )
-            }
+            {prevSelectedIndex && (
+              <div 
+                className="flex flex-col justify-between items-center p-2 cursor-pointer" 
+                onClick={() => {
+                  setSelectedPokemon(prevSelectedIndex);
+                  handleSelect(selectedIndex - 1 < 0 ? pokemonListAll.length - 1 : selectedIndex - 1);
+
+                  // Get new previous and next indices
+                  const total = pokemonListAll.length;
+                  const newIndex = (selectedIndex - 1 + total) % total;
+                  const newPrevIndex = (newIndex - 1 + total) % total;
+                  const newNextIndex = (newIndex + 1) % total;
+
+                  indexPokemonPrev(pokemonListAll[newPrevIndex]);
+                  indexPokemonNext(pokemonListAll[newNextIndex]);
+                }}
+              >
+                <h2>{capitalizeFirstLetter(prevSelectedIndex.name)}</h2>
+                <img className="w-[80%]" src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name} />
+              </div>
+            )}
 
 
           </div>
           <div className="h-[150px] w-[150px] border-2 border-green-600">
-          {
-              nextSelectedIndex && (
-                <div className="flex flex-col justify-between items-center p-2">
-                  <h2 className="">{nextSelectedIndex.name.charAt(0).toUpperCase()+nextSelectedIndex.name.slice(1)}</h2>
-                  <img className=" w-[80%] " src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name}  />
-                </div>
-              )
-            }
+            {nextSelectedIndex && (
+              <div 
+                className="flex flex-col justify-between items-center p-2 cursor-pointer"
+                onClick={() => {
+                  setSelectedPokemon(nextSelectedIndex);
+                  handleSelect((selectedIndex + 1) % pokemonListAll.length);
+
+                  // Get new previous and next indices
+                  const total = pokemonListAll.length;
+                  const newIndex = (selectedIndex + 1) % total;
+                  const newPrevIndex = (newIndex - 1 + total) % total;
+                  const newNextIndex = (newIndex + 1) % total;
+
+                  indexPokemonPrev(pokemonListAll[newPrevIndex]);
+                  indexPokemonNext(pokemonListAll[newNextIndex]);
+                }}
+              >
+                <h2>{capitalizeFirstLetter(nextSelectedIndex.name)}</h2>
+                <img className="w-[80%]" src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name} />
+              </div>
+            )}
           </div>
 
         </section>
@@ -139,22 +180,26 @@ const MainAreaTest = () => {
 
         <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
           <ul>
-            {filteredPokemonList.map((pokemon, index)=> {
-              return(
-                <li key={pokemon.url}>
-                  <a onClick={()=> {
-                    showPokemon(pokemon.url); 
-                    handleSelect(index);
+            {pokemonListAll.map((pokemon, index) => (
+            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)}>
+              <a
+                onClick={() => {
+                  showPokemon(pokemon.url);
+                  handleSelect(index);
 
-                    const total = pokemonListAll.length;
-                    const prevIndex = (index - 1 + total) % total;
-                    const nextIndex = (index + 1) % total;
+                  const total = pokemonListAll.length;
+                  const prevIndex = (index - 1 + total) % total;
+                  const nextIndex = (index + 1) % total;
 
-                    indexPokemonPrev(pokemonListAll[prevIndex]);
-                    indexPokemonNext(pokemonListAll[nextIndex]);
-                    }} href="#" >{capitalizeFirstLetter(pokemon.name)}</a>
-                </li>
-              )})}
+                  indexPokemonPrev(pokemonListAll[prevIndex]);
+                  indexPokemonNext(pokemonListAll[nextIndex]);
+                }}
+                href="#"
+              >
+                {capitalizeFirstLetter(pokemon.name)}
+              </a>
+            </li>
+            ))}
           </ul>
         </section>
       </main>
