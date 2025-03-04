@@ -95,7 +95,7 @@ const MainAreaTest = () => {
   
 
   return (
-    <div>
+    <div className="">
       <section className='pokedex-top border-2 border-amber-600'>
         <input className='search-box' type="text" placeholder='Search...' value={searchTerm}  
         onChange={(event) => {
