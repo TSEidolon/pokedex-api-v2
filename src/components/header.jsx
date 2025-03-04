@@ -2,7 +2,9 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div className='flex justify-center text-4xl pb-2'>
+      Pokedex API
+    </div>
   )
 }
 
