@@ -89,8 +89,8 @@ const MainArea = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <section className='pokedex-top border-2 border-amber-600 w-[200px]'>
-        <input className='search-box' type="text" placeholder='Search...' value={searchTerm}  
+      <section className='pokedex-top flex justify-center w-[250px]'>
+        <input className='bg-zinc-200 text-zinc-600 font-mono ring-1 ring-zinc-400 focus:ring-2 focus:ring-[#DA5B1E] outline-none duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-sm px-3 py-2 shadow-md focus:shadow-lg focus:shadow-[#DA5B1E] "' type="text" placeholder='Pokesearch...' value={searchTerm}  
         onChange={(event) => {
           setSearchTerm(event.target.value);
           const foundPokemon = pokemonListAll.find(pokemon => pokemon.name.includes(event.target.value));
@@ -99,9 +99,10 @@ const MainArea = () => {
           }}}
         />
       </section>
-      <main className="flex justify-center items-center gap-5">
-        <section className='pokedex-left flex flex-col gap-5'>
-          <div className="h-[150px] w-[150px] border-2 border-green-600">
+      <main className="flex justify-center items-center gap-5 h-[500px]">
+        <section className='pokedex-left flex flex-col h-full justify-around'>
+          <div className="prevSelectedIndex-container">
+            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm">
             {prevSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer" 
@@ -119,14 +120,18 @@ const MainArea = () => {
                   indexPokemonNext(pokemonListAll[newNextIndex]);
                 }}
               >
-                <h2>{capitalizeFirstLetter(prevSelectedIndex.name)}</h2>
                 <img className="w-[80%]" src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name} />
+                <h2>{capitalizeFirstLetter(prevSelectedIndex.name)}</h2>
               </div>
             )}
-
-
+            </div>
+            <div className="relative pt-4">
+              <span className="triangle absolute top-[6%] left-[45%]"></span>
+              <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Previous Entry</p>
+            </div>
           </div>
-          <div className="h-[150px] w-[150px] border-2 border-green-600">
+          <div className="nextSelectedIndex-container">
+            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm">
             {nextSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer"
@@ -144,14 +149,20 @@ const MainArea = () => {
                   indexPokemonNext(pokemonListAll[newNextIndex]);
                 }}
               >
-                <h2>{capitalizeFirstLetter(nextSelectedIndex.name)}</h2>
                 <img className="w-[80%]" src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name} />
+                <h2>{capitalizeFirstLetter(nextSelectedIndex.name)}</h2>
               </div>
             )}
+            </div>
+            <div className="relative pt-4">
+              <span className="triangle absolute top-[6%] left-[45%]"></span>
+              <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Next Entry</p>
+            </div>
           </div>
 
+
         </section>
-        <section className="pokedex-middle h-[400px] w-[350px] border-2 border-black">
+        <section className="pokedex-middle h-[440px] w-[350px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm">
           {
             selectedPokemon && (
               <div>
@@ -175,7 +186,7 @@ const MainArea = () => {
           }
         </section>
 
-        <section className='pokedex-right border-2 border-black h-[500px] overflow-y-auto'>
+        <section className='pokedex-right border-2 border-black h-[440px] overflow-y-auto bg-white/30 backdrop-blur-sm'>
           <ul>
             {pokemonListAll.map((pokemon, index) => (
             <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}>
