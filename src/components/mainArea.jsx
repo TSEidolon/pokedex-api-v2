@@ -186,10 +186,10 @@ const MainArea = () => {
           }
         </section>
 
-        <section className='pokedex-right border-2 border-black h-[440px] overflow-y-auto bg-white/30 backdrop-blur-sm'>
-          <ul>
+        <section className='pokedex-right border-2 border-black h-[440px] overflow-y-auto bg-white/30 backdrop-blur-sm [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-[#DA5B1E] '>
+          <ul className="">
             {pokemonListAll.map((pokemon, index) => (
-            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}>
+            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={` text-center py-1 ${highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}`}>
               <a
                 onClick={() => {
                   showPokemon(pokemon.url);
