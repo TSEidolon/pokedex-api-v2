@@ -170,34 +170,38 @@ const MainArea = () => {
             selectedPokemon && (
               <div>
                 <div className="flex justify-stretch p-5">
-                  <img className="p-5 border-2 border-black bg-[#F9F9F7]  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
-                  <div className="text-lg">
+                  <img className="size-[140px] border-2 border-black bg-[#F9F9F7]  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
+                  <div className="text-lg text-yellow-50">
                     <h2 className="font-semibold text-xl pb-2">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
                     <p className="pb-1">Height: {(selectedPokemon.height)/10} m</p>
                     <p>Weight: {(selectedPokemon.weight)/10} kg</p>
+                    <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-red-400 p-1">
+                      More Info
+                    </button>
                   </div>
                 </div>
-                <div className="mx-5  border-2 border-black bg-[#F9F9F7] ">
+                <div className="mx-5 rounded-sm border-2 border-black bg-[#F9F9F7] ">
                   <div className="py-3">
                     {
                       selectedPokemon.stats.map((stat, index) => (
-                        <div className="pl-5 py-0.5" key={index}>
-                          <p> {stat.stat.name}: {stat.base_stat} </p>
+                        <div className="px-5 py-[3px] " key={index}>
+                          <div className="flex border-2 border-green-300">
+                            <p className="pr-1"> {capitalizeFirstLetter(stat.stat.name)}: </p>
+                            <p className=""> {stat.base_stat} </p>
+                          </div>
                         </div>
                       ))
                     }
                   </div>
                 </div>
-                <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-red-400 p-2">
-                  More Info
-                </button>
+
               </div>
             )
           }
           <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain h-full top-0 left-0 opacity-10 -z-10" />
         </section>
 
-        <section className='pokedex-right border-2 border-black h-[440px] overflow-y-auto bg-white/30 backdrop-blur-sm [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-[#DA5B1E] '>
+        <section className='pokedex-right rounded-sm border-2 border-black h-[440px] w-[150px] overflow-y-auto bg-white/30 backdrop-blur-sm [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-[#DA5B1E] '>
           <ul className="">
             {pokemonListAll.map((pokemon, index) => (
             <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={` text-center py-1 ${highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}`}>
