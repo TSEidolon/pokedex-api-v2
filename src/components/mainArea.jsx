@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import pokeBallBackground from "../assets/pokeBallBackground.png"
 
 const MainArea = () => {
   const pokemonRefs = useRef({})
@@ -89,7 +90,7 @@ const MainArea = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <section className='pokedex-top flex justify-center w-[250px]'>
+      <section className='pokedex-top flex justify-center w-[250px] pb-5'>
         <input className='bg-zinc-200 text-zinc-600 font-mono ring-1 ring-zinc-400 focus:ring-2 focus:ring-[#DA5B1E] outline-none duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-sm px-3 py-2 shadow-md focus:shadow-lg focus:shadow-[#DA5B1E] "' type="text" placeholder='Pokesearch...' value={searchTerm}  
         onChange={(event) => {
           setSearchTerm(event.target.value);
@@ -99,10 +100,10 @@ const MainArea = () => {
           }}}
         />
       </section>
-      <main className="flex justify-center items-center gap-5 h-[500px]">
-        <section className='pokedex-left flex flex-col h-full justify-around'>
+      <main className="flex justify-center items-center gap-5 h-[440px] ">
+        <section className='pokedex-left flex flex-col h-full justify-between'>
           <div className="prevSelectedIndex-container">
-            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm">
+            <div className=" h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
             {prevSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer" 
@@ -121,9 +122,10 @@ const MainArea = () => {
                 }}
               >
                 <img className="w-[80%]" src={prevSelectedIndex.sprites.front_default} alt={prevSelectedIndex.name} />
-                <h2>{capitalizeFirstLetter(prevSelectedIndex.name)}</h2>
+                <h2 className="font-semibold">{capitalizeFirstLetter(prevSelectedIndex.name)}</h2>
               </div>
             )}
+            <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
             <div className="relative pt-4">
               <span className="triangle absolute top-[6%] left-[45%]"></span>
@@ -131,7 +133,7 @@ const MainArea = () => {
             </div>
           </div>
           <div className="nextSelectedIndex-container">
-            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm">
+            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
             {nextSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer"
@@ -150,9 +152,10 @@ const MainArea = () => {
                 }}
               >
                 <img className="w-[80%]" src={nextSelectedIndex.sprites.front_default} alt={nextSelectedIndex.name} />
-                <h2>{capitalizeFirstLetter(nextSelectedIndex.name)}</h2>
+                <h2 className="font-semibold">{capitalizeFirstLetter(nextSelectedIndex.name)}</h2>
               </div>
             )}
+            <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
             <div className="relative pt-4">
               <span className="triangle absolute top-[6%] left-[45%]"></span>
