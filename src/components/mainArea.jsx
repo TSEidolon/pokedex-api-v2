@@ -165,7 +165,7 @@ const MainArea = () => {
 
 
         </section>
-        <section className="pokedex-middle h-[440px] w-[350px] border-2 border-black rounded-sm bg-[#DA5B1E] backdrop-blur-xs relative">
+        <section className="pokedex-middle h-[440px] w-[350px] border-2 border-black rounded-sm bg-[#DA5B1E] backdrop-blur-xs relative ">
           {
             selectedPokemon && (
               <div>
@@ -228,8 +228,14 @@ const MainArea = () => {
           </ul>
         </section>
       </main>
-      <section className="pokedex-bottom">
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
+      <section className="pokedex-bottom flex justify-center items-end ">
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif" alt="Eevee"/>
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/metagross.gif" alt="Metagross"/>
+      <img className="" src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/tyranitar.gif" alt="Tyranitar"/>
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/electivire.gif" alt="Electivire"/>
+      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/typhlosion.gif" alt="Typhlosion"/>
+      
       </section>
     </div>
   )
