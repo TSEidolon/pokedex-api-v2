@@ -171,11 +171,11 @@ const MainArea = () => {
               <div>
                 <div className="flex justify-stretch p-5">
                   <img className="size-[140px] border-2 border-black bg-zinc-200  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
-                  <div className="text-lg text-yellow-50">
-                    <h2 className="font-semibold text-xl pb-2">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
+                  <div className="text-lg text-yellow-50 flex flex-col justify-between">
+                    <h2 className="font-semibold text-xl ">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
                     <p className="pb-1">Height: {(selectedPokemon.height)/10} m</p>
                     <p>Weight: {(selectedPokemon.weight)/10} kg</p>
-                    <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-red-400 p-1">
+                    <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-black p-0.5 text-black bg-zinc-200 rounded-sm w-full hover:text-white hover:font-bold hover:bg-black hover:border-white shadow-md hover:shadow-lg hover:shadow-white duration-300 ease-in-out">
                       More Info
                     </button>
                   </div>
@@ -188,7 +188,7 @@ const MainArea = () => {
                           <div className="flex  relative pb-1">
                             <p className="pr-1 z-10"> {capitalizeFirstLetter(stat.stat.name)}: </p>
                             <p className="z-10"> {stat.base_stat} </p>
-                            <span className="absolute bottom-0 bg-amber-400 w-full h-[7px] z-0 rounded-sm" style={{width: `${stat.base_stat}px` }} ></span>
+                            <span className="absolute bottom-0 bg-amber-400 w-full h-[7px] z-0 rounded-sm" style={{width: `${stat.base_stat * 1.5}px` }} ></span>
                           </div>
                         </div>
                       ))
