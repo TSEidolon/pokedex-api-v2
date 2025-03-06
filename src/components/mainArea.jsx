@@ -127,8 +127,8 @@ const MainArea = () => {
             )}
             <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
-            <div className="relative pt-4">
-              <span className="triangle absolute top-[6%] left-[45%]"></span>
+            <div className="relative pt-4 animate-bounce">
+              <span className="triangle absolute top-[6%] left-[45%] "></span>
               <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Previous Entry</p>
             </div>
           </div>
@@ -157,8 +157,8 @@ const MainArea = () => {
             )}
             <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
-            <div className="relative pt-4">
-              <span className="triangle absolute top-[6%] left-[45%]"></span>
+            <div className="relative pt-4 animate-bounce">
+              <span className="triangle absolute top-[6%] left-[45%] "></span>
               <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Next Entry</p>
             </div>
           </div>
@@ -171,9 +171,9 @@ const MainArea = () => {
               <div>
                 <div className="flex justify-stretch p-5">
                   <img className="size-[140px] border-2 border-black bg-zinc-200  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
-                  <div className="text-lg text-yellow-50 flex flex-col justify-between">
+                  <div className="text-lg text-yellow-50 flex flex-col justify-between w-full pl-3">
                     <h2 className="font-semibold text-xl ">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
-                    <p className="pb-1">Height: {(selectedPokemon.height)/10} m</p>
+                    <p className="pb-1 ">Height: {(selectedPokemon.height)/10} m</p>
                     <p>Weight: {(selectedPokemon.weight)/10} kg</p>
                     <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-black p-0.5 text-black bg-zinc-200 rounded-sm w-full hover:text-white hover:font-bold hover:bg-black hover:border-white shadow-md hover:shadow-lg hover:shadow-white duration-300 ease-in-out">
                       More Info
@@ -229,13 +229,13 @@ const MainArea = () => {
         </section>
       </main>
       <section className="pokedex-bottom flex justify-center items-end ">
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif" alt="Eevee"/>
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/metagross.gif" alt="Metagross"/>
-      <img className="" src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/tyranitar.gif" alt="Tyranitar"/>
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/electivire.gif" alt="Electivire"/>
-      <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/typhlosion.gif" alt="Typhlosion"/>
-      
+        <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif" alt="Eevee"/>
+        <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/metagross.gif" alt="Metagross"/>
+        <img className="" src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
+        <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/tyranitar.gif" alt="Tyranitar"/>
+        <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/electivire.gif" alt="Electivire"/>
+        <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/typhlosion.gif" alt="Typhlosion"/>
+        
       </section>
     </div>
   )
