@@ -170,7 +170,7 @@ const MainArea = () => {
             selectedPokemon && (
               <div>
                 <div className="flex justify-stretch p-5">
-                  <img className="size-[140px] border-2 border-black bg-[#F9F9F7]  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
+                  <img className="size-[140px] border-2 border-black bg-zinc-200  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
                   <div className="text-lg text-yellow-50">
                     <h2 className="font-semibold text-xl pb-2">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
                     <p className="pb-1">Height: {(selectedPokemon.height)/10} m</p>
@@ -180,14 +180,15 @@ const MainArea = () => {
                     </button>
                   </div>
                 </div>
-                <div className="mx-5 rounded-sm border-2 border-black bg-[#F9F9F7] ">
+                <div className="mx-5 rounded-sm border-2 border-black bg-zinc-200 ">
                   <div className="py-3">
                     {
                       selectedPokemon.stats.map((stat, index) => (
                         <div className="px-5 py-[3px] " key={index}>
-                          <div className="flex border-2 border-green-300">
-                            <p className="pr-1"> {capitalizeFirstLetter(stat.stat.name)}: </p>
-                            <p className=""> {stat.base_stat} </p>
+                          <div className="flex  relative pb-1">
+                            <p className="pr-1 z-10"> {capitalizeFirstLetter(stat.stat.name)}: </p>
+                            <p className="z-10"> {stat.base_stat} </p>
+                            <span className="absolute bottom-0 bg-amber-400 w-full h-[7px] z-0 rounded-sm" style={{width: `${stat.base_stat}px` }} ></span>
                           </div>
                         </div>
                       ))
