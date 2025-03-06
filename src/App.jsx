@@ -7,7 +7,7 @@ function App() {
   
 
   return (
-    <div className="bg-[url(./assets/pokeBackground.jpg)] w-full h-screen flex justify-center flex-col gap-0">
+    <div className="bg-[url(./assets/pokeBackground.jpg)] w-full h-full lg:h-screen flex justify-center flex-col gap-0">
       <Header/>
       <MainArea/>
     </div>

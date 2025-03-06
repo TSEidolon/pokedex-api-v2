@@ -89,9 +89,9 @@ const MainArea = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <section className='pokedex-top flex justify-center w-[250px] pb-5'>
-        <input className='bg-zinc-200 text-zinc-600 font-mono ring-1 ring-zinc-400 focus:ring-2 focus:ring-[#DA5B1E] outline-none duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-sm px-3 py-2 shadow-md focus:shadow-lg focus:shadow-[#DA5B1E] "' type="text" placeholder='Pokesearch...' value={searchTerm}  
+    <div className="flex flex-col justify-center items-center ">
+      <section className='pokedex-top flex justify-center w-[350px] lg:w-[250px] pb-2 lg:pb-5'>
+        <input className='bg-zinc-200 text-zinc-600 font-mono ring-1 ring-zinc-400 focus:ring-2 focus:ring-[#DA5B1E] outline-none duration-300 placeholder:text-zinc-600 placeholder:opacity-50 rounded-sm px-5 lg:px-3 py-2 shadow-md focus:shadow-lg focus:shadow-[#DA5B1E] text-center w-full lg:w-auto' type="text" placeholder='Pokesearch...' value={searchTerm}  
         onChange={(event) => {
           setSearchTerm(event.target.value);
           const foundPokemon = pokemonListAll.find(pokemon => pokemon.name.includes(event.target.value));
@@ -100,10 +100,10 @@ const MainArea = () => {
           }}}
         />
       </section>
-      <main className="flex justify-center items-center gap-5 h-[440px] ">
-        <section className='pokedex-left flex flex-col h-full justify-between'>
+      <main className="flex justify-center items-center gap-2 lg:gap-5 h-full lg:h-[440px] lg:flex-row flex-col-reverse">
+        <section className='pokedex-left flex flex-row lg:flex-col h-full gap-5  lg:justify-between lg:w-auto w-full justify-center select-none'>
           <div className="prevSelectedIndex-container">
-            <div className=" h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
+            <div className=" lg:h-[150px] lg:w-[150px] h-[110px]  w-[110px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
             {prevSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer" 
@@ -127,13 +127,13 @@ const MainArea = () => {
             )}
             <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
-            <div className="relative pt-4 animate-bounce">
+            <div className="relative pt-4 animate-bounce select-none">
               <span className="triangle absolute top-[6%] left-[45%] "></span>
               <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Previous Entry</p>
             </div>
           </div>
           <div className="nextSelectedIndex-container">
-            <div className="h-[150px] w-[150px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
+            <div className="lg:h-[150px] lg:w-[150px] h-[110px]  w-[110px] border-2 border-black rounded-sm bg-white/30 backdrop-blur-sm relative">
             {nextSelectedIndex && (
               <div 
                 className="flex flex-col justify-between items-center p-2 cursor-pointer"
@@ -157,7 +157,7 @@ const MainArea = () => {
             )}
             <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain top-0 left-0 opacity-20 -z-10" />
             </div>
-            <div className="relative pt-4 animate-bounce">
+            <div className="relative pt-4 animate-bounce select-none">
               <span className="triangle absolute top-[6%] left-[45%] "></span>
               <p className="border-2 border-black rounded-sm text-center bg-white/30 backdrop-blur-sm">Next Entry</p>
             </div>
@@ -170,17 +170,17 @@ const MainArea = () => {
             selectedPokemon && (
               <div>
                 <div className="flex justify-stretch p-5">
-                  <img className="size-[140px] border-2 border-black bg-zinc-200  rounded-sm" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
+                  <img className="size-[140px] border-2 border-black bg-zinc-200  rounded-sm select-none" src={selectedPokemon.sprites.front_default} alt={selectedPokemon.name}  />
                   <div className="text-lg text-yellow-50 flex flex-col justify-between w-full pl-3">
                     <h2 className="font-semibold text-xl ">{capitalizeFirstLetter(selectedPokemon.name)}</h2>
                     <p className="pb-1 ">Height: {(selectedPokemon.height)/10} m</p>
                     <p>Weight: {(selectedPokemon.weight)/10} kg</p>
-                    <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-black p-0.5 text-black bg-zinc-200 rounded-sm w-full hover:text-white hover:font-bold hover:bg-black hover:border-white shadow-md hover:shadow-lg hover:shadow-white duration-300 ease-in-out">
+                    <button onClick={()=> window.open(`https://pokemondb.net/pokedex/${selectedPokemon.name}`)} className="border-2 border-black p-0.5 text-black bg-zinc-200 rounded-sm w-full hover:text-white hover:font-bold hover:bg-black hover:border-white shadow-md hover:shadow-lg hover:shadow-white duration-300 ease-in-out cursor-pointer select-none">
                       More Info
                     </button>
                   </div>
                 </div>
-                <div className="mx-5 rounded-sm border-2 border-black bg-zinc-200 ">
+                <div className="mx-5 rounded-sm border-2 border-black bg-zinc-200 select-none ">
                   <div className="py-3">
                     {
                       selectedPokemon.stats.map((stat, index) => (
@@ -202,10 +202,10 @@ const MainArea = () => {
           <img src={pokeBallBackground} alt="pokeball background" className="absolute object-contain h-full top-0 left-0 opacity-10 -z-10" />
         </section>
 
-        <section className='pokedex-right rounded-sm border-2 border-black h-[440px] w-[150px] overflow-y-auto bg-white/30 backdrop-blur-sm [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-[#DA5B1E] '>
+        <section className='pokedex-right rounded-sm border-2 border-black lg:h-[440px] lg:w-[150px] overflow-y-auto bg-white/30 backdrop-blur-sm [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-[#DA5B1E] h-[120px] w-[350px] '>
           <ul className="">
             {pokemonListAll.map((pokemon, index) => (
-            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={` text-center py-1 ${highlightedPokemon === pokemon.name ? " text-red-500 font-bold " : " text-black "}`}>
+            <li key={pokemon.url} ref={(spotlight) => (pokemonRefs.current[pokemon.name] = spotlight)} className={` text-sm lg:text-base text-center lg:py-1 py-0.5 ${highlightedPokemon === pokemon.name ? " text-[#DA5B1E] font-bold " : " text-black "}`}>
               <a
                 onClick={() => {
                   showPokemon(pokemon.url);
@@ -228,15 +228,20 @@ const MainArea = () => {
           </ul>
         </section>
       </main>
-      <section className="pokedex-bottom flex justify-center items-end ">
+      <section className="pokedex-bottom  grid justify-items-center items-end lg:grid-cols-6 lg:py-5  py-2 grid-cols-3 select-none">
         <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/eevee.gif" alt="Eevee"/>
         <img src="https://img.pokemondb.net/sprites/black-white/anim/shiny/metagross.gif" alt="Metagross"/>
         <img className="" src="https://img.pokemondb.net/sprites/black-white/anim/normal/gengar.gif" alt="Gengar"/>
         <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/tyranitar.gif" alt="Tyranitar"/>
         <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/electivire.gif" alt="Electivire"/>
-        <img src="https://img.pokemondb.net/sprites/black-white/anim/normal/typhlosion.gif" alt="Typhlosion"/>
+        <img className="" src="https://img.pokemondb.net/sprites/black-white/anim/normal/typhlosion.gif" alt="Typhlosion"/>
         
       </section>
+      <section className="border-2 border-black bg-white/20 backdrop-blur-sm rounded-sm p-1 my-2 flex select-none">
+       
+        Brought to life by Edgar, fueled by coffee ☕. 
+      </section>
+
     </div>
   )
 }
