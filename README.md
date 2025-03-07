@@ -1,4 +1,5 @@
-[Figma Mockup](https://www.figma.com/design/ZjhKNX4SJLmqhdf7YKuuXK/Pokedex-Api?node-id=0-1&t=HPZ8UZpWkXefTma6-1)
+ ## [Live Website]()
+ - [Figma Mockup](https://www.figma.com/design/ZjhKNX4SJLmqhdf7YKuuXK/Pokedex-Api?node-id=0-1&t=HPZ8UZpWkXefTma6-1)
 
  - Had trouble with the next and previous pokemon to fetch at the same time as the main pokemon. Turns out that the states of the next and previous pokemon updated at a different interval as the main. This lead to the them being one state behind.
  - Fixed by transfering the troublemakers into the filteredPokemonList click event.
@@ -26,7 +27,7 @@
 
 ```
 
-
+ - Uses the pokemon API from [pokeapi](https://pokeapi.co/)
 
 # React + Vite
 
