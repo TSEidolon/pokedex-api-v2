@@ -1,4 +1,6 @@
- ## [Live Website](https://pokedex-tseidolon.netlify.app/)
+ A Pokemon search app that fetches and displays data using JS, Tailwind CSS, and PokeAPI's REST API 
+ 
+ -  [Live Website](https://pokedex-tseidolon.netlify.app/)
  - [Figma Mockup](https://www.figma.com/design/ZjhKNX4SJLmqhdf7YKuuXK/Pokedex-Api?node-id=0-1&t=HPZ8UZpWkXefTma6-1)
   - Uses the pokemon API from [pokeapi](https://pokeapi.co/)
 
